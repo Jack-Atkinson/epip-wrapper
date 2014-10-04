@@ -39,7 +39,6 @@ int startCore(int row, int col)
 {
 	int sync = 1;
 	e_coreid_t coreid;
-	//e_neighbor_id(E_NEXT_CORE, E_GROUP_WRAP, &row, &col); //get row and col for neighboring core
 	coreid = e_coreid_from_coords(row, col);
 	if(!(coreid == e_get_coreid())) {
 		coreid <<= 20; //turns the local coreid into a global core address ex: 0x00000809 -> 0x80900000

@@ -32,12 +32,6 @@
 int main(int argc, char *argv[])
 {
 	Epiphany epiphany("etest.srec", true);
-	//change name of getEpip to something like getEpipAddr
-	//e_start(epiphany.getEpipAddr(), 0, 0);
-	//char input[1024];
-	//e_read(epiphany.getEmem(), 0, 0, 0x0, input, 1024);
-
-	//fprintf(stdout, "%s\n", input);
 
 	return EXIT_SUCCESS;
 }
