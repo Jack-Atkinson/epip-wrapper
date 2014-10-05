@@ -27,14 +27,11 @@
 /* Define the desired workgroup size.
    If it exceeds the chip's capabilites it will default to max possible. */
 #define WORKGRP_ROWS 4 //add check to make sure these are not 0 or negative
-#define WORKGRP_COLS 4 //also add check in primeSieve file to make sure these are
+#define WORKGRP_COLS 4
 
 
 /* Define the shared memory buffer and offset */
-#ifndef E_BUFF
-	#define E_BUFF 4096
-#endif
-
+#define E_BUFF 64
 #define E_BUFF_OFFSET 0x01000000
 
 class Epiphany {

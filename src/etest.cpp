@@ -20,8 +20,9 @@
 
 
 #include <e-lib.h>
+#include <cstdio>
 
-int output[1024] SECTION("shared_dram");
+char output[64] SECTION("shared_dram");
 
 int main(void) {
 	e_coreid_t coreid;
@@ -30,20 +31,8 @@ int main(void) {
 
 	e_coreid_t *test = (e_coreid_t *)0x2000;
 
-	test[0] = 0xdeadbeef;
+	sprintf(output, "Hello from Epiphany");
+	test[0] = coreid;
 
-	return E_OK;
-}
-
-int startCore(int row, int col)
-{
-	int sync = 1;
-	e_coreid_t coreid;
-	coreid = e_coreid_from_coords(row, col);
-	if(!(coreid == e_get_coreid())) {
-		coreid <<= 20; //turns the local coreid into a global core address ex: 0x00000809 -> 0x80900000
-		coreid += E_REG_ILATST; //address of ILATST reg
-		e_write(&e_group_config, &sync, row, col, (e_coreid_t *)coreid, sizeof(int));
-	}
 	return E_OK;
 }

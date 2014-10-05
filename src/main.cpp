@@ -27,11 +27,23 @@
 
 #include <cstdlib>
 #include <e-hal.h>
+#include <unistd.h>
+
 #include "epiphany.h"
+
 
 int main(int argc, char *argv[])
 {
-	Epiphany epiphany("etest.srec", true);
+	Epiphany epiphany("etest.srec", false);
+
+	e_start(epiphany.getEpipAddr(), 0, 0);
+
+	char dataFromShared[64];
+	unsigned dataFromLocal;
+	usleep(10000);
+	e_read(epiphany.getEmemAddr(), 0, 0, 0x0, dataFromShared, 64);
+	e_read(epiphany.getEpipAddr(), 0, 0, 0x2000, &dataFromLocal, sizeof(unsigned));
+	fprintf(stdout, "Data from shared mem (string): %s\nData from local mem (coreid): %x\n", dataFromShared, dataFromLocal);
 
 	return EXIT_SUCCESS;
 }
